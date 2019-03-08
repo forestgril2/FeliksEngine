@@ -1,0 +1,25 @@
+[Project]
+Name=FeliksEngine
+Manager=KDevCMakeManager
+VersionControl=kdevgit
+
+[Launch]
+Launch Configurations=Launch Configuration 0
+
+[Launch][Launch Configuration 0]
+Configured Launch Modes=execute
+Configured Launchers=nativeAppLauncher
+Name=feliksengine Launcher
+Type=Native Application
+
+[Launch][Launch Configuration 0][Data]
+Arguments=
+Dependencies=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x00)
+Dependency Action=Nothing
+EnvironmentGroup=
+Executable=file:///home/space/Projects/FeliksEngine/build/bin/feliksengine
+External Terminal=konsole --noclose --workdir %workdir -e %exe
+Project Target=feliksengine
+Use External Terminal=true
+Working Directory=
+isExecutable=true

@@ -1,0 +1,44 @@
+This template was created for personal use. You may tweak it as you like.
+Normally it should be located under
+~/.local/share/kdevappwizard/templates/cpp_Bjarne_CMake.
+
+std_lib_facilities.h is a header file written by Bjarne Stroustrup and used in his books.
+It contains some of the most common headers and functions used and implements some others,
+usefull for the examples on these books. Feel free to examine or modify the
+header.
+
+3/7/2016: I updated it, in order to be able to work with regex.
+
+29/12/2016: platform.h is removed.
+
+3/1/2017 :Removed some depreceated definitions from std_lib_facilities.h in order to work with Microsoft's compiler.
+
+20/2/2017: Updated the inner CMakeList.txt in order to build shared libs if the user needs to.
+Just uncomment what is needed and append the names that correspond to your libraries source files.
+
+Use add_library() in order to *create* one from your code.
+Use target_link_libraries( feliksengine somelib) in order to link your code to an external library.
+example (let's say you need BOOST) : target_link_libraries( feliksengine ${Boost_LIBRARIES} )
+---
+
+"headers" directory should contain any additional header you may write for consistency.
+"src" directory should contain any .cc or .cpp file you may write for consistency.
+*You have to edit* CMakeList.txt and add these files with their respective
+directory.
+
+Example how your project shoulde be structured:
+HEADERS:
+#{PROJECTFOLDER}/headers/std_lib_facilities.h
+#{PROJECTFOLDER}/headers/platform.h
+
+SRC:
+#{PROJECTFOLDER}/src/feliksengine.cpp
+but
+#{PROJECTFOLDER}/example.cpp ->*NOT recommended* <-
+
+ Now, given that any src file is under src dir, a header
+ should be included in this way: #Include "../headers/new_header.h",
+ while if the src is under the top project directory it should
+ be included like: #Include "headers/new_header.h".
+
+ For any question, c&c please contact me @ petross404@gmail.com
