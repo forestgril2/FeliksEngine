@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/space/Projects/FeliksEngine/src/feliksengine.cpp
+cassert
+-
+algorithm
+-
+vector
+-
+numeric
+-
+ctime
+-
+cmath
+-
+tuple
+-
+iostream
+-
+

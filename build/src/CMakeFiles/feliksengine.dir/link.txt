@@ -1,0 +1,1 @@
+/usr/lib64/ccache/c++   -Wall -std=c++17 -g  -rdynamic CMakeFiles/feliksengine.dir/feliksengine.cpp.o  -o ../bin/feliksengine 

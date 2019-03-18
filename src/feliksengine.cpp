@@ -1,12 +1,15 @@
-#include "headers/std_lib_facilities.h"
 #include <cassert>
 #include <algorithm>
 #include <vector>
 #include <numeric>
 #include <ctime>
+#include <cmath>
+#include <tuple>
+#include <iostream>
+
+using namespace std;
 
 int main ( int argc, char** argv ) {
-    //your code goes here
     
     auto volume = [&](double angle, double l1, double l2, double area){
         
@@ -22,31 +25,69 @@ int main ( int argc, char** argv ) {
         return displacement*area;
     };
     
-    std::vector<double> v = {0,0,0};
+    vector<double> v = {0,0,0};
     vector<double> speed = {1, 0.5, 0.5};
-    vector<double> alpha = {0, 135*M_PI/180, 225*M_PI/180};
-    vector<double> area = {4200,3000,1300};
-    vector<double> l1 = {120,120,120};
-    vector<double> l2 = {35,30,30};
     
-    vector<tuple<double, double>> fullData; //mainRotation, V
+    using ParamsMinMax = vector<vector<double>> ;
     
-    for(int i = 0; i < l1.size(); i++)
+    ParamsMinMax angles = {{0, 110*M_PI/180, 200*M_PI/180},
+                          {0, 160*M_PI/180, 250*M_PI/180}};
+                                    
+    ParamsMinMax areas = {{3200,1500,700},
+                         {5200,4500,2300}};
+                                   
+    ParamsMinMax cams1 = {{80,80,80},
+                       {160,160,160}};
+                                 
+    ParamsMinMax cams2 = {{15,15,15}, 
+                       {65,65,65}};
+                       
+    enum Cyl : unsigned
     {
-        assert(l1[i]>l2[i]);
-    }
+        Main = 0,
+        Aux1 = 1,
+        Aux2 = 2,
+    };
+    
+    enum Extremum : unsigned
+    {
+        Min = 0,
+        Max = 1
+    };
+    
+    auto extremalParam = [](ParamsMinMax p, Extremum e, Cyl c) {
+        return p[e][c];
+    };
+    
+    auto paramRange = [&](ParamsMinMax p, Cyl c, int steps = 1) {
+        vector<double> ret;
+        auto min = extremalParam(p, Min, c);
+        auto step = (extremalParam(p, Max, c) - min)/steps; 
+        for (int i = 0; i < steps; i++)
+        {
+            ret.push_back(min + i*step);
+        }
+        return ret;
+    };
+    
+    vector<tuple<double, double>> fullData; //mainRotation, V, l0, l1, l
     
     clock_t begin = clock();
 
-    
+
+    for (auto angle: paramRange(angles, static_cast<Cyl>(0)))
+    for (auto cam1:  paramRange(cams1,  static_cast<Cyl>(0)))
+    for (auto cam2:  paramRange(cams2,  static_cast<Cyl>(0)))
+    for (auto area:  paramRange(areas,  static_cast<Cyl>(0)))    
+        
     for (double mainRotation = 0; mainRotation < 4*M_PI; mainRotation += 2*M_PI/360)
     {
-        for(int i = 0; i < l1.size(); i++)
+        for (double mainRotation = 0; mainRotation < 4*M_PI; mainRotation += 2*M_PI/360)
         {
-            v[i] = volume(alpha[i] + mainRotation*speed[i], l1[i], l2[i], area[i]);
+            
+                    v[i] = volume(angle + mainRotation*speed[i], cam1, cam2, area);
+            fullData.push_back({mainRotation, accumulate(v.begin(), v.end(), 0)});
         }
-        
-        fullData.push_back({mainRotation, accumulate(v.begin(), v.end(), 0)});
     }
     
   clock_t end = clock();
@@ -55,9 +96,6 @@ int main ( int argc, char** argv ) {
   
     int minimal = 0;
     int maximal = 0;
-    
-    double maxVal = 0;
-    double minVal = 100000000000;
     
     for (int i = 0; i<fullData.size(); i++)
     {
@@ -76,6 +114,7 @@ int main ( int argc, char** argv ) {
     
     cout <<  "Min volume at main rotation: " << 180*get<0>(fullData[minimal])/M_PI << ", "  << get<1>(fullData[minimal]) << endl;
     cout <<  "Max volume at main rotation: " << 180*get<0>(fullData[maximal])/M_PI << ", "  << get<1>(fullData[maximal]) << endl;
+    cout <<  "Compression ratio: " << 180*get<0>(fullData[maximal])/M_PI << ", "  << get<1>(fullData[maximal])/get<1>(fullData[minimal]) << endl;
 
     return ( 0 );
 }
