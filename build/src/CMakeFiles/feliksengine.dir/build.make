@@ -60,15 +60,15 @@ include src/CMakeFiles/feliksengine.dir/flags.make
 src/CMakeFiles/feliksengine.dir/feliksengine.cpp.o: src/CMakeFiles/feliksengine.dir/flags.make
 src/CMakeFiles/feliksengine.dir/feliksengine.cpp.o: ../src/feliksengine.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/space/Projects/FeliksEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object src/CMakeFiles/feliksengine.dir/feliksengine.cpp.o"
-	cd /home/space/Projects/FeliksEngine/build/src && /usr/lib64/ccache/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/feliksengine.dir/feliksengine.cpp.o -c /home/space/Projects/FeliksEngine/src/feliksengine.cpp
+	cd /home/space/Projects/FeliksEngine/build/src && /usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/feliksengine.dir/feliksengine.cpp.o -c /home/space/Projects/FeliksEngine/src/feliksengine.cpp
 
 src/CMakeFiles/feliksengine.dir/feliksengine.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/feliksengine.dir/feliksengine.cpp.i"
-	cd /home/space/Projects/FeliksEngine/build/src && /usr/lib64/ccache/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/space/Projects/FeliksEngine/src/feliksengine.cpp > CMakeFiles/feliksengine.dir/feliksengine.cpp.i
+	cd /home/space/Projects/FeliksEngine/build/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/space/Projects/FeliksEngine/src/feliksengine.cpp > CMakeFiles/feliksengine.dir/feliksengine.cpp.i
 
 src/CMakeFiles/feliksengine.dir/feliksengine.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/feliksengine.dir/feliksengine.cpp.s"
-	cd /home/space/Projects/FeliksEngine/build/src && /usr/lib64/ccache/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/space/Projects/FeliksEngine/src/feliksengine.cpp -o CMakeFiles/feliksengine.dir/feliksengine.cpp.s
+	cd /home/space/Projects/FeliksEngine/build/src && /usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/space/Projects/FeliksEngine/src/feliksengine.cpp -o CMakeFiles/feliksengine.dir/feliksengine.cpp.s
 
 src/CMakeFiles/feliksengine.dir/feliksengine.cpp.o.requires:
 

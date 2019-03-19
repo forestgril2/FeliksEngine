@@ -1,4 +1,4 @@
-set(CMAKE_CXX_COMPILER "/usr/lib64/ccache/c++")
+set(CMAKE_CXX_COMPILER "/usr/bin/g++")
 set(CMAKE_CXX_COMPILER_ARG1 "")
 set(CMAKE_CXX_COMPILER_ID "GNU")
 set(CMAKE_CXX_COMPILER_VERSION "6.4.1")

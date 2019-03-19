@@ -7,6 +7,8 @@
 #IncludeRegexTransform: 
 
 /home/space/Projects/FeliksEngine/src/feliksengine.cpp
+iostream
+-
 cassert
 -
 algorithm

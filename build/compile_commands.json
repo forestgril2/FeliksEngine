@@ -1,7 +1,7 @@
 [
 {
   "directory": "/home/space/Projects/FeliksEngine/build/src",
-  "command": "/usr/lib64/ccache/c++  -DGIT_BRANCH=489a404516aba64d40ae7fbdca1ece387c3ec5b2 -I/home/space/Projects/FeliksEngine/build/src -I/home/space/Projects/FeliksEngine/src   -Wall -std=c++17 -g   -o CMakeFiles/feliksengine.dir/feliksengine.cpp.o -c /home/space/Projects/FeliksEngine/src/feliksengine.cpp",
+  "command": "/usr/lib64/ccache/c++  -DGIT_BRANCH=ff9e65b79b222caed9279b369d6a12b44fce99e5 -I/home/space/Projects/FeliksEngine/build/src -I/home/space/Projects/FeliksEngine/src   -Wall -std=c++17 -g   -o CMakeFiles/feliksengine.dir/feliksengine.cpp.o -c /home/space/Projects/FeliksEngine/src/feliksengine.cpp",
   "file": "/home/space/Projects/FeliksEngine/src/feliksengine.cpp"
 }
 ]
