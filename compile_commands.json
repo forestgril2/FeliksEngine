@@ -1,0 +1,26 @@
+[
+{
+    "arguments": [
+        "clang++",
+        "-c",
+        "-m64",
+        "-target",
+        "x86_64-redhat-linux",
+        "-std=c++17",
+        "-fcxx-exceptions",
+        "-fexceptions",
+        "-DGIT_BRANCH=704aec4dcaa81c259313c4503d074637791b61ba",
+        "-DBOOST_TYPE_INDEX_CTTI_USER_DEFINED_PARSING=(39, 1, true, \"T = \")",
+        "-fPIC",
+        "-I",
+        "/home/space/Projects/FeliksEngine/build/src",
+        "-I",
+        "/home/space/Projects/FeliksEngine/src",
+        "-x",
+        "c++",
+        "/home/space/Projects/FeliksEngine/src/feliksengine.cpp"
+    ],
+    "directory": "/home/space/Projects/FeliksEngine/build",
+    "file": "/home/space/Projects/FeliksEngine/src/feliksengine.cpp"
+}
+]

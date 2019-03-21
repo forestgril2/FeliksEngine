@@ -1,1 +1,1 @@
-/usr/bin/g++   -Wall -std=c++17  -rdynamic CMakeFiles/feliksengine.dir/feliksengine.cpp.o  -o ../bin/feliksengine 
+/usr/bin/g++   -Wall -std=c++17 -O2 -DNDEBUG  -rdynamic CMakeFiles/feliksengine.dir/feliksengine.cpp.o  -o ../bin/feliksengine 
