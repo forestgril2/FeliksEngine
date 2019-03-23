@@ -103,7 +103,7 @@ int main ( int argc, char** argv )
     double compressRatDeltaMin = 0.0001;
 
     long passes = 0;
-    long maxPasses = 100;
+    long maxPasses = 154;
 
     auto bestCompressionRatioForParamSet = [&](vector<vector<double>> paramsAllCyls){
         auto begin = clock();
@@ -132,9 +132,11 @@ int main ( int argc, char** argv )
 
         auto end = clock();
         auto elapsed_microsec = end - begin;
-        cout <<  "Microseconds elapsed: " << elapsed_microsec << endl;
         auto compressionRatio = (*minMax.second)[1]/(*minMax.first)[1];
-        cout <<  "CompressionRatio : " << compressionRatio  << endl;
+
+//        cout <<  "Microseconds elapsed: " << elapsed_microsec << endl;
+//        cout <<  "CompressionRatio : " << compressionRatio  << endl;
+
         return compressionRatio;
     };
 
@@ -143,6 +145,10 @@ int main ( int argc, char** argv )
         allCylParams[cyl][param] *= (1 + relative_epsilon);
         return (bestCompressionRatioForParamSet(allCylParams) - compressRat)/relative_epsilon;
     };
+
+    vector<double> paramsCylFast = {angleFast, cam1Fast, cam2Fast, areaFast};
+    vector<double> paramsCylIn =   {angleIn, cam1In, cam2In, areaIn};
+    vector<double> paramsCylOut =  {angleOut, cam1Out, cam2Out, areaOut};
 
     do
     {
@@ -154,26 +160,45 @@ int main ( int argc, char** argv )
 //                angleOut, cam1Out, cam2Out, areaOut
 //               };
 
-        auto paramsCylFast = {angleFast, cam1Fast, cam2Fast, areaFast};
-        auto paramsCylIn =   {angleIn, cam1In, cam2In, areaIn};
-        auto paramsCylOut =  {angleOut, cam1Out, cam2Out, areaOut};
+
 
         vector<vector<double>> allCylParams = {paramsCylFast, paramsCylIn, paramsCylOut};
 
         compressRat = bestCompressionRatioForParamSet(allCylParams);
+        cout <<  "compressRat : " << compressRat  << endl;
 
         vector<vector<double>> compressionRatioPartialDifferentials;
         compressionRatioPartialDifferentials.resize(allCylParams.size());
 
+
+        double differential = 0;
+        double squaresSum = 0;
+        double gradientLen = 0;
         for (ulong cyl = 0; cyl < compressionRatioPartialDifferentials.size(); ++cyl)
         {
             compressionRatioPartialDifferentials[cyl].resize(allCylParams[cyl].size());
 
             for (ulong param = 0; param < compressionRatioPartialDifferentials[cyl].size(); ++param)
             {
-                compressionRatioPartialDifferentials[cyl][param] = getCompressionRatioDifferentialForParam(allCylParams, cyl,param);
+                differential = getCompressionRatioDifferentialForParam(allCylParams, cyl,param);
+                compressionRatioPartialDifferentials[cyl][param] = differential;
+                squaresSum += differential*differential;
             }
         }
+
+        gradientLen = sqrt(squaresSum);
+
+        for (ulong cyl = 0; cyl < allCylParams.size(); ++cyl)
+        {
+            for (ulong param = 0; param < allCylParams[cyl].size(); ++param)
+            {
+                allCylParams[cyl][param] += -0.5*compressionRatioPartialDifferentials[cyl][param]/gradientLen;
+            }
+        }
+
+        paramsCylFast = allCylParams[0];
+        paramsCylIn = allCylParams[1];
+        paramsCylOut = allCylParams[2];
 
         fullPass.clear();
 
@@ -181,6 +206,18 @@ int main ( int argc, char** argv )
         cout <<  "passes: " << passes << endl;
     }
     while (abs((compressRat - compressRatPrev)/compressRat) >= compressRatDeltaMin && passes <= maxPasses);
+
+    auto printCylParams = [](string name, vector<double> params) {
+        cout << " ### params for " << name << endl;
+        cout << " ### >angle: " << params[0] << endl;
+        cout << " ### >cam1 : " << params[1] << endl;
+        cout << " ### >cam2 : " << params[2] << endl;
+        cout << " ### >area : " << params[3] << endl;
+    };
+
+    printCylParams ("Fast", paramsCylFast);
+    printCylParams ("In",   paramsCylIn);
+    printCylParams ("Out",  paramsCylOut);
 
 
 //    cout <<  "Min volume at main rotation: " << 180*get<0>(fullPass[minimal])/M_PI << ", "  << get<1>(fullPass[minimal]) << endl;

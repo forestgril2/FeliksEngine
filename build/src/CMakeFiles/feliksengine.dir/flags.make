@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/g++
 CXX_FLAGS =  -Wall -std=c++17 -O2 -DNDEBUG  
 
-CXX_DEFINES = -DGIT_BRANCH=704aec4dcaa81c259313c4503d074637791b61ba
+CXX_DEFINES = -DGIT_BRANCH=5c3ef6f495fec99b6b9e194c3da648518f618ba2
 
 CXX_INCLUDES = -I/home/space/Projects/FeliksEngine/build/src -I/home/space/Projects/FeliksEngine/src 
 
